@@ -1,101 +1,137 @@
-# 以文搜图检索系统 (Text-to-Image Retrieval System)
+# Text-to-Image Retrieval System
 
-基于CLIP/SigLIP + FAISS向量索引的图像检索系统，支持使用自然语言描述搜索相关图片。
+An image retrieval system based on CLIP/SigLIP + FAISS vector indexing that supports searching for related images using natural language descriptions.
 
-## 功能特性
+## Features
 
-- 🔍 **以文搜图**: 使用自然语言描述搜索相关图片
-- 🚀 **高效检索**: 基于FAISS向量索引，支持快速相似度搜索
-- 🎯 **多模型支持**: 支持CLIP、SigLIP和NVIDIA NIM预训练模型
-- 🌐 **Web界面**: 提供直观的Streamlit Web界面
-- 📊 **可视化结果**: 展示检索结果和相似度分数
-- ☁️ **云端推理**: 支持NVIDIA NIM云端视觉-语言模型服务
+- 🔍 **Text-to-Image Search**: Search for related images using natural language descriptions
+- 🚀 **Efficient Retrieval**: Based on FAISS vector indexing for fast similarity search
+- 🎯 **Multi-Model Support**: Supports CLIP, SigLIP, and NVIDIA NIM pretrained models
+- 🌐 **Web Interface**: Provides intuitive Streamlit web interface
+- 📊 **Visual Results**: Display search results and similarity scores
+- ☁️ **Cloud Inference**: Supports NVIDIA NIM cloud vision-language model services
 
-## 安装依赖
+## Installation
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## 使用方法
+## Usage
 
-### 1. 构建图像索引
+### 1. Build Image Index
 
 ```bash
 python build_index.py --image_dir ./images --index_path ./image_index.faiss
 ```
 
-### 2. 启动Web界面
+### 2. Start Web Interface
 
 ```bash
 streamlit run app.py
 ```
 
-### 3. 使用API
+### 3. Use API
 
 ```python
-from image_retrieval import ImageRetrievalSystem
+from src.retrieval import ImageRetrievalSystem
 
-# 初始化系统
+# Initialize system
 retrieval_system = ImageRetrievalSystem()
-retrieval_system.load_index("./image_index.faiss")
+retrieval_system.load_system("./image_index")
 
-# 搜索图片
+# Search images
 results = retrieval_system.search("a cat sitting on a chair", top_k=5)
 ```
 
-## 项目结构
+## Project Structure
 
 ```
 image-retrieval/
 ├── src/
-│   ├── encoders/          # 编码器模块
-│   ├── indexing/          # 向量索引模块
-│   └── retrieval/         # 检索系统核心
-├── app.py                 # Streamlit Web应用
-├── build_index.py         # 构建索引脚本
-├── requirements.txt       # 项目依赖
-└── README.md             # 项目说明
+│   ├── encoders/          # Encoder modules
+│   ├── indexing/          # Vector indexing modules
+│   └── retrieval/         # Retrieval system core
+├── examples/              # Example scripts
+├── app.py                 # Streamlit web application
+├── build_index.py         # Index building script
+├── test_system.py         # System testing script
+├── download_hf_dataset.py # Hugging Face dataset downloader
+├── quick_start.py         # Quick start script
+├── requirements.txt       # Project dependencies
+└── README.md             # Project documentation
 ```
 
-## 支持的模型
+## Supported Models
 
-### 本地模型
-- **CLIP**: OpenAI的经典视觉-语言模型
-  - `openai/clip-vit-base-patch32` (默认)
+### Local Models
+- **CLIP**: OpenAI's classic vision-language model
+  - `openai/clip-vit-base-patch32` (default)
   - `openai/clip-vit-large-patch14`
-- **SigLIP**: Google的改进版CLIP模型
-  - `google/siglip-base-patch16-224` (默认)
+- **SigLIP**: Google's improved CLIP model
+  - `google/siglip-base-patch16-224` (default)
   - `google/siglip-large-patch16-256`
 
-### NVIDIA NIM云端模型
-- **nvidia/nvclip**: NVIDIA优化的CLIP模型
-- **nvidia/nv-dinov2**: NVIDIA DINOv2视觉基础模型
-- **nvidia/vila**: 多模态视觉-语言模型
-- **meta/llama-3.2-90b-vision-instruct**: Llama视觉模型
-- **meta/llama-3.2-11b-vision-instruct**: Llama视觉模型（小版本）
+### NVIDIA NIM Cloud Models
+- **nvidia/nvclip**: NVIDIA optimized CLIP model
+- **nvidia/nv-dinov2**: NVIDIA DINOv2 vision foundation model
+- **nvidia/vila**: Multimodal vision-language model
+- **meta/llama-3.2-90b-vision-instruct**: Llama vision model
+- **meta/llama-3.2-11b-vision-instruct**: Llama vision model (smaller version)
 
-## 技术架构
+## Technical Architecture
 
-- **图像编码**: CLIP/SigLIP/NVIDIA NIM模型提取图像特征
-- **文本编码**: 同一模型的文本编码器处理查询文本
-- **向量索引**: FAISS构建高效的相似度搜索索引
-- **检索算法**: 余弦相似度匹配最相关的图片
-- **云端推理**: 支持NVIDIA NIM API进行云端模型推理
+- **Image Encoding**: CLIP/SigLIP/NVIDIA NIM models extract image features
+- **Text Encoding**: Same model's text encoder processes query text
+- **Vector Indexing**: FAISS builds efficient similarity search index
+- **Retrieval Algorithm**: Cosine similarity matching for most relevant images
+- **Cloud Inference**: Supports NVIDIA NIM API for cloud model inference
 
-## NVIDIA NIM使用说明
+## NVIDIA NIM Usage Guide
 
-1. **获取API密钥**: 访问 [NVIDIA NGC](https://catalog.ngc.nvidia.com/) 获取API密钥
-2. **设置环境变量**: `export NVIDIA_API_KEY="your_api_key"`
-3. **选择模型**: 从支持的NVIDIA NIM模型中选择合适的模型
-4. **构建索引**: 使用`--encoder_type nvidia_nim`参数
+1. **Get API Key**: Visit [NVIDIA NGC](https://catalog.ngc.nvidia.com/) to obtain API key
+2. **Set Environment Variable**: `export NVIDIA_API_KEY="your_api_key"`
+3. **Choose Model**: Select appropriate model from supported NVIDIA NIM models
+4. **Build Index**: Use `--encoder_type nvidia_nim` parameter
 
-### NVIDIA NIM示例
-```python
-# 运行NVIDIA NIM示例
+### NVIDIA NIM Examples
+```bash
+# Run NVIDIA NIM example
 python examples/nvidia_nim_example.py
 
-# 或者直接测试
+# Or test directly
 export NVIDIA_API_KEY="your_api_key"
 python test_system.py --encoder_type nvidia_nim --nvidia_api_key $NVIDIA_API_KEY
+```
+
+## Quick Start
+
+### Method 1: One-click Start
+```bash
+python quick_start.py
+```
+
+### Method 2: Manual Steps
+
+#### Download Sample Dataset
+```bash
+python download_hf_dataset.py --dataset simple --num_samples 50
+```
+
+#### Build Index with Different Encoders
+```bash
+# Using CLIP
+python build_index.py --image_dir hf_images --index_path my_index --encoder_type clip
+
+# Using SigLIP
+python build_index.py --image_dir hf_images --index_path my_index --encoder_type siglip
+
+# Using NVIDIA NIM
+export NVIDIA_API_KEY="your_api_key"
+python build_index.py --image_dir hf_images --index_path my_index --encoder_type nvidia_nim
+```
+
+#### Start Web Interface
+```bash
+streamlit run app.py -- --index_path my_index
 ```
