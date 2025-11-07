@@ -1,20 +1,6 @@
 from http.server import BaseHTTPRequestHandler
 import json
 import os
-import sys
-import base64
-from io import BytesIO
-from PIL import Image
-import numpy as np
-
-# Add the parent directory to the path to import our modules
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-
-try:
-    from src.encoders import NVIDIANIMEncoder
-except ImportError:
-    # Fallback if modules are not available
-    NVIDIANIMEncoder = None
 
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
@@ -191,7 +177,7 @@ class handler(BaseHTTPRequestHandler):
                     resultsDiv.innerHTML = '<div class="loading">🔍 Searching with ' + provider + ' provider...</div>';
                     
                     try {
-                        const response = await fetch('/api/multi_provider_search', {
+                        const response = await fetch('/api/search', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json',
