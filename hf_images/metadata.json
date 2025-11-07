@@ -1,0 +1,142 @@
+[
+  {
+    "filename": "cat_000.png",
+    "filepath": "hf_images\\cat_000.png",
+    "class": "cat",
+    "label": 3,
+    "description": "A cat from CIFAR-10 test set"
+  },
+  {
+    "filename": "ship_001.png",
+    "filepath": "hf_images\\ship_001.png",
+    "class": "ship",
+    "label": 8,
+    "description": "A ship from CIFAR-10 test set"
+  },
+  {
+    "filename": "ship_002.png",
+    "filepath": "hf_images\\ship_002.png",
+    "class": "ship",
+    "label": 8,
+    "description": "A ship from CIFAR-10 test set"
+  },
+  {
+    "filename": "airplane_003.png",
+    "filepath": "hf_images\\airplane_003.png",
+    "class": "airplane",
+    "label": 0,
+    "description": "A airplane from CIFAR-10 test set"
+  },
+  {
+    "filename": "frog_004.png",
+    "filepath": "hf_images\\frog_004.png",
+    "class": "frog",
+    "label": 6,
+    "description": "A frog from CIFAR-10 test set"
+  },
+  {
+    "filename": "frog_005.png",
+    "filepath": "hf_images\\frog_005.png",
+    "class": "frog",
+    "label": 6,
+    "description": "A frog from CIFAR-10 test set"
+  },
+  {
+    "filename": "automobile_006.png",
+    "filepath": "hf_images\\automobile_006.png",
+    "class": "automobile",
+    "label": 1,
+    "description": "A automobile from CIFAR-10 test set"
+  },
+  {
+    "filename": "frog_007.png",
+    "filepath": "hf_images\\frog_007.png",
+    "class": "frog",
+    "label": 6,
+    "description": "A frog from CIFAR-10 test set"
+  },
+  {
+    "filename": "cat_008.png",
+    "filepath": "hf_images\\cat_008.png",
+    "class": "cat",
+    "label": 3,
+    "description": "A cat from CIFAR-10 test set"
+  },
+  {
+    "filename": "automobile_009.png",
+    "filepath": "hf_images\\automobile_009.png",
+    "class": "automobile",
+    "label": 1,
+    "description": "A automobile from CIFAR-10 test set"
+  },
+  {
+    "filename": "airplane_010.png",
+    "filepath": "hf_images\\airplane_010.png",
+    "class": "airplane",
+    "label": 0,
+    "description": "A airplane from CIFAR-10 test set"
+  },
+  {
+    "filename": "truck_011.png",
+    "filepath": "hf_images\\truck_011.png",
+    "class": "truck",
+    "label": 9,
+    "description": "A truck from CIFAR-10 test set"
+  },
+  {
+    "filename": "dog_012.png",
+    "filepath": "hf_images\\dog_012.png",
+    "class": "dog",
+    "label": 5,
+    "description": "A dog from CIFAR-10 test set"
+  },
+  {
+    "filename": "horse_013.png",
+    "filepath": "hf_images\\horse_013.png",
+    "class": "horse",
+    "label": 7,
+    "description": "A horse from CIFAR-10 test set"
+  },
+  {
+    "filename": "truck_014.png",
+    "filepath": "hf_images\\truck_014.png",
+    "class": "truck",
+    "label": 9,
+    "description": "A truck from CIFAR-10 test set"
+  },
+  {
+    "filename": "ship_015.png",
+    "filepath": "hf_images\\ship_015.png",
+    "class": "ship",
+    "label": 8,
+    "description": "A ship from CIFAR-10 test set"
+  },
+  {
+    "filename": "dog_016.png",
+    "filepath": "hf_images\\dog_016.png",
+    "class": "dog",
+    "label": 5,
+    "description": "A dog from CIFAR-10 test set"
+  },
+  {
+    "filename": "horse_017.png",
+    "filepath": "hf_images\\horse_017.png",
+    "class": "horse",
+    "label": 7,
+    "description": "A horse from CIFAR-10 test set"
+  },
+  {
+    "filename": "ship_018.png",
+    "filepath": "hf_images\\ship_018.png",
+    "class": "ship",
+    "label": 8,
+    "description": "A ship from CIFAR-10 test set"
+  },
+  {
+    "filename": "frog_019.png",
+    "filepath": "hf_images\\frog_019.png",
+    "class": "frog",
+    "label": 6,
+    "description": "A frog from CIFAR-10 test set"
+  }
+]

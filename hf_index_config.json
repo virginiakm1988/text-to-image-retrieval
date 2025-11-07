@@ -1,0 +1,228 @@
+{
+  "encoder_type": "clip",
+  "model_name": "openai/clip-vit-base-patch32",
+  "index_type": "flat",
+  "image_database": {
+    "hf_images\\airplane_003.png": {
+      "filename": "airplane_003.png",
+      "path": "hf_images\\airplane_003.png",
+      "size": [
+        32,
+        32
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "file_size": 2151
+    },
+    "hf_images\\airplane_010.png": {
+      "filename": "airplane_010.png",
+      "path": "hf_images\\airplane_010.png",
+      "size": [
+        32,
+        32
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "file_size": 1813
+    },
+    "hf_images\\automobile_006.png": {
+      "filename": "automobile_006.png",
+      "path": "hf_images\\automobile_006.png",
+      "size": [
+        32,
+        32
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "file_size": 2476
+    },
+    "hf_images\\automobile_009.png": {
+      "filename": "automobile_009.png",
+      "path": "hf_images\\automobile_009.png",
+      "size": [
+        32,
+        32
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "file_size": 2498
+    },
+    "hf_images\\cat_000.png": {
+      "filename": "cat_000.png",
+      "path": "hf_images\\cat_000.png",
+      "size": [
+        32,
+        32
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "file_size": 2493
+    },
+    "hf_images\\cat_008.png": {
+      "filename": "cat_008.png",
+      "path": "hf_images\\cat_008.png",
+      "size": [
+        32,
+        32
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "file_size": 2356
+    },
+    "hf_images\\dog_012.png": {
+      "filename": "dog_012.png",
+      "path": "hf_images\\dog_012.png",
+      "size": [
+        32,
+        32
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "file_size": 2387
+    },
+    "hf_images\\dog_016.png": {
+      "filename": "dog_016.png",
+      "path": "hf_images\\dog_016.png",
+      "size": [
+        32,
+        32
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "file_size": 2556
+    },
+    "hf_images\\frog_004.png": {
+      "filename": "frog_004.png",
+      "path": "hf_images\\frog_004.png",
+      "size": [
+        32,
+        32
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "file_size": 2581
+    },
+    "hf_images\\frog_005.png": {
+      "filename": "frog_005.png",
+      "path": "hf_images\\frog_005.png",
+      "size": [
+        32,
+        32
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "file_size": 2404
+    },
+    "hf_images\\frog_007.png": {
+      "filename": "frog_007.png",
+      "path": "hf_images\\frog_007.png",
+      "size": [
+        32,
+        32
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "file_size": 2179
+    },
+    "hf_images\\frog_019.png": {
+      "filename": "frog_019.png",
+      "path": "hf_images\\frog_019.png",
+      "size": [
+        32,
+        32
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "file_size": 2591
+    },
+    "hf_images\\horse_013.png": {
+      "filename": "horse_013.png",
+      "path": "hf_images\\horse_013.png",
+      "size": [
+        32,
+        32
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "file_size": 2602
+    },
+    "hf_images\\horse_017.png": {
+      "filename": "horse_017.png",
+      "path": "hf_images\\horse_017.png",
+      "size": [
+        32,
+        32
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "file_size": 2505
+    },
+    "hf_images\\ship_001.png": {
+      "filename": "ship_001.png",
+      "path": "hf_images\\ship_001.png",
+      "size": [
+        32,
+        32
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "file_size": 2154
+    },
+    "hf_images\\ship_002.png": {
+      "filename": "ship_002.png",
+      "path": "hf_images\\ship_002.png",
+      "size": [
+        32,
+        32
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "file_size": 2272
+    },
+    "hf_images\\ship_015.png": {
+      "filename": "ship_015.png",
+      "path": "hf_images\\ship_015.png",
+      "size": [
+        32,
+        32
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "file_size": 2581
+    },
+    "hf_images\\ship_018.png": {
+      "filename": "ship_018.png",
+      "path": "hf_images\\ship_018.png",
+      "size": [
+        32,
+        32
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "file_size": 2198
+    },
+    "hf_images\\truck_011.png": {
+      "filename": "truck_011.png",
+      "path": "hf_images\\truck_011.png",
+      "size": [
+        32,
+        32
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "file_size": 2500
+    },
+    "hf_images\\truck_014.png": {
+      "filename": "truck_014.png",
+      "path": "hf_images\\truck_014.png",
+      "size": [
+        32,
+        32
+      ],
+      "format": "PNG",
+      "mode": "RGB",
+      "file_size": 2491
+    }
+  },
+  "embedding_dim": 512
+}
