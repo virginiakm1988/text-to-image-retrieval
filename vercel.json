@@ -3,5 +3,15 @@
     "index.py": {
       "runtime": "@vercel/python"
     }
-  }
+  },
+  "routes": [
+    {
+      "src": "/static",
+      "dest": "/index.html"
+    },
+    {
+      "src": "/",
+      "dest": "/index.py"
+    }
+  ]
 }

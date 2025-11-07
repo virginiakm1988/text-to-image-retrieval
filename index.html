@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text-to-Image Retrieval System</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .header h1 {
+            color: #333;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        .search-input {
+            width: 100%;
+            padding: 15px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+        .search-button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .search-button:hover {
+            transform: translateY(-2px);
+        }
+        .results {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        .result-item {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 15px;
+            text-align: center;
+            background: #f9f9f9;
+            transition: transform 0.2s;
+        }
+        .result-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .result-item img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        .similarity-score {
+            background: #e8f4fd;
+            color: #1f77b4;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: inline-block;
+        }
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            font-size: 1.2rem;
+        }
+        .info {
+            background: #e8f4fd;
+            color: #0984e3;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+        .demo-queries {
+            margin: 20px 0;
+            text-align: center;
+        }
+        .demo-query {
+            display: inline-block;
+            background: #f0f0f0;
+            padding: 8px 15px;
+            margin: 5px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .demo-query:hover {
+            background: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🔍 Text-to-Image Retrieval System</h1>
+            <p>Search for images using natural language descriptions</p>
+        </div>
+        
+        <div class="info">
+            <strong>Demo Version:</strong> This is a client-side demo using curated images. 
+            For the full AI-powered version with NVIDIA NIM, OpenAI, and Gemini support, 
+            deploy the Python version to Vercel.
+        </div>
+        
+        <div>
+            <input type="text" id="searchInput" class="search-input" 
+                   placeholder="e.g., a cat sitting on a chair" />
+            <button onclick="searchImages()" class="search-button">Search Images</button>
+        </div>
+        
+        <div class="demo-queries">
+            <strong>Try these:</strong>
+            <span class="demo-query" onclick="setQuery('cat')">cat</span>
+            <span class="demo-query" onclick="setQuery('dog')">dog</span>
+            <span class="demo-query" onclick="setQuery('airplane')">airplane</span>
+            <span class="demo-query" onclick="setQuery('mountain')">mountain</span>
+            <span class="demo-query" onclick="setQuery('city')">city</span>
+            <span class="demo-query" onclick="setQuery('person')">person</span>
+        </div>
+        
+        <div id="results" class="results"></div>
+    </div>
+    
+    <script>
+        const imageDatabase = [
+            {
+                url: 'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&h=300&fit=crop&auto=format',
+                filename: 'orange_tabby_cat.jpg',
+                description: 'Orange tabby cat with green eyes',
+                keywords: ['cat', 'feline', 'orange', 'tabby', 'pet', 'animal'],
+                baseScore: 0.95
+            },
+            {
+                url: 'https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=400&h=300&fit=crop&auto=format',
+                filename: 'white_cat_portrait.jpg',
+                description: 'White cat close-up portrait',
+                keywords: ['cat', 'white', 'portrait', 'feline', 'pet', 'animal'],
+                baseScore: 0.92
+            },
+            {
+                url: 'https://images.unsplash.com/photo-1552053831-71594a27632d?w=400&h=300&fit=crop&auto=format',
+                filename: 'golden_retriever.jpg',
+                description: 'Golden retriever dog in nature',
+                keywords: ['dog', 'golden retriever', 'canine', 'pet', 'animal', 'outdoor'],
+                baseScore: 0.94
+            },
+            {
+                url: 'https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&h=300&fit=crop&auto=format',
+                filename: 'cute_puppy.jpg',
+                description: 'Adorable puppy with big eyes',
+                keywords: ['puppy', 'dog', 'cute', 'young', 'canine', 'pet', 'animal'],
+                baseScore: 0.91
+            },
+            {
+                url: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=400&h=300&fit=crop&auto=format',
+                filename: 'airplane_blue_sky.jpg',
+                description: 'Commercial airplane flying in blue sky',
+                keywords: ['airplane', 'plane', 'aircraft', 'sky', 'flight', 'aviation', 'transportation'],
+                baseScore: 0.93
+            },
+            {
+                url: 'https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=300&fit=crop&auto=format',
+                filename: 'snow_mountain_peak.jpg',
+                description: 'Snow-capped mountain peak against blue sky',
+                keywords: ['mountain', 'snow', 'peak', 'landscape', 'nature', 'scenic'],
+                baseScore: 0.89
+            },
+            {
+                url: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=400&h=300&fit=crop&auto=format',
+                filename: 'city_skyline_sunset.jpg',
+                description: 'City skyline at sunset with golden light',
+                keywords: ['city', 'skyline', 'urban', 'buildings', 'sunset', 'architecture'],
+                baseScore: 0.87
+            },
+            {
+                url: 'https://images.unsplash.com/photo-1503023345310-bd7c1de61c7d?w=400&h=300&fit=crop&auto=format',
+                filename: 'person_mountain_view.jpg',
+                description: 'Person enjoying mountain view',
+                keywords: ['person', 'human', 'mountain', 'view', 'outdoor', 'hiking', 'people'],
+                baseScore: 0.85
+            },
+            {
+                url: 'https://images.unsplash.com/photo-1464822759844-d150baec3e5e?w=400&h=300&fit=crop&auto=format',
+                filename: 'mountain_lake_reflection.jpg',
+                description: 'Mountain reflection in calm lake water',
+                keywords: ['mountain', 'lake', 'reflection', 'water', 'scenic', 'nature'],
+                baseScore: 0.86
+            },
+            {
+                url: 'https://images.unsplash.com/photo-1480714378408-67cf0d13bc1f?w=400&h=300&fit=crop&auto=format',
+                filename: 'night_city_lights.jpg',
+                description: 'Night city with illuminated buildings',
+                keywords: ['city', 'night', 'lights', 'urban', 'buildings', 'illuminated'],
+                baseScore: 0.84
+            }
+        ];
+
+        function setQuery(query) {
+            document.getElementById('searchInput').value = query;
+            searchImages();
+        }
+
+        function searchImages() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            
+            if (!query) {
+                alert('Please enter a search description');
+                return;
+            }
+            
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<div class="loading">🔍 Searching...</div>';
+            
+            // Simulate search delay for realism
+            setTimeout(() => {
+                const results = performSearch(query);
+                displayResults(results, query);
+            }, 800);
+        }
+
+        function performSearch(query) {
+            const queryWords = query.split(' ');
+            
+            // Score each image based on keyword matching
+            const scoredImages = imageDatabase.map(img => {
+                let score = img.baseScore;
+                let matchCount = 0;
+                
+                // Check for keyword matches
+                queryWords.forEach(word => {
+                    img.keywords.forEach(keyword => {
+                        if (keyword.includes(word) || word.includes(keyword)) {
+                            score += 0.1;
+                            matchCount++;
+                        }
+                    });
+                });
+                
+                // Boost score for multiple matches
+                if (matchCount > 1) {
+                    score += 0.05 * matchCount;
+                }
+                
+                return {
+                    ...img,
+                    similarity_score: Math.min(0.98, score)
+                };
+            });
+            
+            // Sort by score and return top 6
+            return scoredImages
+                .sort((a, b) => b.similarity_score - a.similarity_score)
+                .slice(0, 6);
+        }
+
+        function displayResults(results, query) {
+            const resultsDiv = document.getElementById('results');
+            
+            if (results.length === 0) {
+                resultsDiv.innerHTML = `
+                    <div style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+                        <h3>No results found for "${query}"</h3>
+                        <p>Try searching for: cat, dog, airplane, mountain, city, or person</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            resultsDiv.innerHTML = `
+                <div style="grid-column: 1 / -1; margin-bottom: 20px; text-align: center;">
+                    <h3>Search Results for "${query}"</h3>
+                    <p>Found ${results.length} relevant images</p>
+                </div>
+            `;
+            
+            results.forEach(result => {
+                const resultItem = document.createElement('div');
+                resultItem.className = 'result-item';
+                resultItem.innerHTML = `
+                    <img src="${result.url}" alt="${result.description}" loading="lazy" />
+                    <div class="similarity-score">Similarity: ${result.similarity_score.toFixed(3)}</div>
+                    <div style="font-weight: bold; margin: 8px 0;">${result.filename}</div>
+                    <div style="font-size: 0.9em; color: #666; line-height: 1.4;">${result.description}</div>
+                `;
+                resultsDiv.appendChild(resultItem);
+            });
+        }
+
+        // Allow Enter key to trigger search
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchImages();
+            }
+        });
+
+        // Show some initial results
+        window.onload = function() {
+            setQuery('cat');
+        };
+    </script>
+</body>
+</html>
