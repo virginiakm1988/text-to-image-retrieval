@@ -1,39 +1,7 @@
 {
-  "version": 2,
   "functions": {
-    "api/*.py": {
+    "index.py": {
       "runtime": "@vercel/python"
     }
-  },
-  "routes": [
-    {
-      "src": "/api/search",
-      "dest": "/api/search.py"
-    },
-    {
-      "src": "/api/test",
-      "dest": "/api/test.py"
-    },
-    {
-      "src": "/api/multi_provider_search",
-      "dest": "/api/multi_provider_search.py"
-    },
-    {
-      "src": "/api/nvidia_search", 
-      "dest": "/api/nvidia_search.py"
-    },
-    {
-      "src": "/",
-      "dest": "/api/index.py"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/api/index.py"
-    }
-  ],
-  "env": {
-    "NVIDIA_API_KEY": "@nvidia_api_key",
-    "OPENAI_API_KEY": "@openai_api_key",
-    "GEMINI_API_KEY": "@gemini_api_key"
   }
 }
