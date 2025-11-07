@@ -220,12 +220,12 @@ class handler(BaseHTTPRequestHandler):
                     }
                 }
                 
-                function displayResults(results, query) {
+                function displayResults(results, query, provider_used) {
                     const resultsDiv = document.getElementById('results');
                     resultsDiv.innerHTML = `
                         <div style="grid-column: 1 / -1; margin-bottom: 20px;">
                             <h3>Search Results - "${query}"</h3>
-                            <p>Found ${results.length} relevant images</p>
+                            <p>Found ${results.length} relevant images using <strong>${provider_used}</strong> provider</p>
                         </div>
                     `;
                     
@@ -233,9 +233,11 @@ class handler(BaseHTTPRequestHandler):
                         const resultItem = document.createElement('div');
                         resultItem.className = 'result-item';
                         resultItem.innerHTML = `
-                            <img src="${result.image_url}" alt="Search result" />
+                            <img src="${result.image_url}" alt="Search result" loading="lazy" />
                             <div class="similarity-score">Similarity: ${result.similarity_score.toFixed(3)}</div>
-                            <div>${result.filename}</div>
+                            <div style="font-weight: bold; margin: 5px 0;">${result.filename}</div>
+                            ${result.description ? `<div style="font-size: 0.9em; color: #666;">${result.description}</div>` : ''}
+                            ${result.tags ? `<div style="font-size: 0.8em; color: #888; margin-top: 5px;">${result.tags.join(', ')}</div>` : ''}
                         `;
                         resultsDiv.appendChild(resultItem);
                     });
