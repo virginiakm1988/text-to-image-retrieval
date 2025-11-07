@@ -175,10 +175,13 @@ class handler(BaseHTTPRequestHandler):
     
     def do_POST(self):
         """Handle API requests"""
-        if self.path == '/api/search':
-            self.handle_search()
-        else:
-            self.send_error(404, "Not Found")
+        try:
+            if self.path == '/api/search' or self.path == '/':
+                self.handle_search()
+            else:
+                self.send_error(404, "Not Found")
+        except Exception as e:
+            self.send_json_response({'error': f'Server error: {str(e)}'}, 500)
     
     def handle_search(self):
         """Handle search requests"""

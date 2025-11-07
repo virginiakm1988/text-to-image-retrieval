@@ -2,7 +2,7 @@
   "version": 2,
   "builds": [
     {
-      "src": "index.py",
+      "src": "api/search.py",
       "use": "@vercel/python"
     },
     {
@@ -12,12 +12,12 @@
   ],
   "routes": [
     {
-      "src": "/static",
-      "dest": "/index.html"
+      "src": "/api/search",
+      "dest": "/api/search.py"
     },
     {
       "src": "/",
-      "dest": "/index.py"
+      "dest": "/index.html"
     }
   ]
 }
